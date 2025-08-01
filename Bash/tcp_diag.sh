@@ -47,8 +47,22 @@ while true; do
             ;;
 
         3)
-            echo "[DNS Lookup]"
+            echo "[DNS Lookup Test]"
+              command -v nslookup >/dev/null 2>&1 || { 
+                echo "nslookup is not installed"
+                echo "Installing nslookup..."
+                sudo apt update && sudo apt install -y dnsutils
+              }
+
+            read -p "Choose your destination: " dest
+            if [[ -z "$dest" ]]; then
+                echo "Destination cannot be empty."
+            else
+                echo "DNS look up to $dest..." 
+                nslookup "$dest" 
+            fi
             ;;
+
         4)
             echo "[HTTP Check]"
             ;;
