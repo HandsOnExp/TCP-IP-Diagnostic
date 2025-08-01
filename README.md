@@ -23,13 +23,14 @@ This tool provides basic tests like `ping`, `traceroute`, `nslookup`, and `curl`
 Choose an option [1-5]:
 
 
-# 🧪 Tests Included
+## 🧪 Tests Included
 
-Option	  Tool	       What it does
-1	      ping	       ICMP ping test
-2	      traceroute   Shows hops between source and dest
-3	      nslookup	   DNS name resolution
-4	      curl	       HTTP status code and connectivity
+| Option | Tool       | What it does                      |
+|--------|------------|-----------------------------------|
+| 1      | ping       | ICMP ping test                    |
+| 2      | traceroute | Shows hops between source and dest |
+| 3      | nslookup   | DNS name resolution               |
+| 4      | curl       | HTTP status code and connectivity |
 
 
 # 📦 Requirements
