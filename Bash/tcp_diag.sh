@@ -104,7 +104,7 @@ while true; do
                 code=$(curl -s -o /dev/null -w "%{http_code}" "$dest")
                 curl_exit=$?
 
-                 if [[ $curl_exite -eq 0 ]]; then
+                 if [[ $curl_exit -eq 0 ]]; then
                   log_entry "HTTP request to $dest succeeded"
                 else
                   log_entry "HTTP request to $dest failed"
