@@ -4,7 +4,7 @@ A simple Bash-based menu tool for diagnosing common TCP/IP networking issues.
 
 This tool provides basic tests like `ping`, `traceroute`, `nslookup`, and `curl` through an interactive CLI, with automatic tool installation and logging.
 
-# 🔧 Features
+## 🔧 Features
 
 - ✅ Menu-driven interface
 - ✅ Automatic tool checks and installs (`ping`, `traceroute`, `nslookup`, `curl`)
@@ -12,7 +12,7 @@ This tool provides basic tests like `ping`, `traceroute`, `nslookup`, and `curl`
 - ✅ Basic logging to `diag_log.txt`
 - ✅ HTTP status code handling (2xx/3xx/4xx/5xx)
 
-# 📋 Example Output
+## 📋 Example Output
 
 === TCP/IP Diagnostic Tool ===
 1. Ping Test
@@ -33,14 +33,14 @@ Choose an option [1-5]:
 | 4      | curl       | HTTP status code and connectivity |
 
 
-# 📦 Requirements
+## 📦 Requirements
 
 Debian/Ubuntu-based system with apt
 Bash (script uses [[ ... ]] syntax)
 Internet connection for installation (if tools are missing) and for tools functionality 
 
 
-# 🗂️ Logs
+## 🗂️ Logs
 
 All operations are logged to diag_log.txt in the same directory:
 
@@ -48,7 +48,7 @@ All operations are logged to diag_log.txt in the same directory:
 [2025-08-01 14:25:03] traceroute to google.com failed
 
 
-# 🚀 Usage
+## 🚀 Usage
 
 chmod +x tcp_diag.sh
 ./tcp_diag.sh
