@@ -1,5 +1,16 @@
 #!/bin/bash
 
+LOGFILE="diag_log.txt"
+log_entry() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> "$LOGFILE"
+}
+if [[ -s "$LOGFILE" && -w "$LOGFILE" ]]; then
+    echo "Logging to existing log file: $LOGFILE"
+else
+    echo "Creating new or empty log file: $LOGFILE"
+    touch "$LOGFILE"
+fi
+
 while true; do
     echo ""
     echo "=== TCP/IP Diagnostic Tool ==="
@@ -25,9 +36,13 @@ while true; do
             else
               echo "Pinging $dest..."
               ping -c4 "$dest"
-            fi
-    
-              
+              if [[ $? -eq 0 ]]; then
+                log_entry "Ping to $dest succeeded"
+              else
+                log_entry "Ping to $dest failed"
+              fi
+
+            fi  
             ;;
         2)
             echo "[Traceroute Test]"
@@ -43,6 +58,11 @@ while true; do
             else
                 echo "Tracing route to $dest..."
                 traceroute "$dest"
+                if [[ $? -eq 0 ]]; then
+                  log_entry "traceroute to $dest succeeded"
+                else
+                  log_entry "traceroute to $dest failed"
+                fi
             fi
             ;;
 
@@ -58,8 +78,13 @@ while true; do
             if [[ -z "$dest" ]]; then
                 echo "Destination cannot be empty."
             else
-                echo "DNS look up to $dest..." 
-                nslookup "$dest" 
+                echo "DNS lookup to $dest..." 
+                nslookup "$dest"
+                if [[ $? -eq 0 ]]; then
+                  log_entry "DNS lookup to $dest succeeded"
+                else
+                  log_entry "DNS lookup to $dest failed"
+                fi 
             fi
             ;;
 
@@ -77,6 +102,13 @@ while true; do
             else
                 echo "Checking HTTP status on $dest..."
                 code=$(curl -s -o /dev/null -w "%{http_code}" "$dest")
+                curl_exit=$?
+
+                 if [[ $curl_exite -eq 0 ]]; then
+                  log_entry "HTTP request to $dest succeeded"
+                else
+                  log_entry "HTTP request to $dest failed"
+                fi 
 
                 if [[ $code == 2* ]]; then
                   echo "Success: HTTP $code"
