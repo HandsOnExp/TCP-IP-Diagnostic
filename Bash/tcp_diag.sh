@@ -30,8 +30,22 @@ while true; do
               
             ;;
         2)
-            echo "[Traceroute]"
+            echo "[Traceroute Test]"
+              command -v traceroute >/dev/null 2>&1 || {
+                echo "traceroute is not installed"
+                echo "Installing traceroute..."
+                sudo apt update && sudo apt install -y traceroute
+              }
+
+            read -p "Choose your destination: " dest
+            if [[ -z "$dest" ]]; then
+                echo "Destination cannot be empty."
+            else
+                echo "Tracing route to $dest..."
+                traceroute "$dest"
+            fi
             ;;
+
         3)
             echo "[DNS Lookup]"
             ;;
