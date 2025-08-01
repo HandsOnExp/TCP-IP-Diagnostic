@@ -18,6 +18,7 @@ while true; do
                 echo "ping is not installed"
                 echo "installing ping..."
                 sudo apt update && sudo apt install -y iputils-ping
+              }  
             read -p "Choose your destination: " dest 
             if [[ -z "$dest" ]]; then
               echo "Destination cannot be empty."
@@ -26,7 +27,7 @@ while true; do
               ping -c4 "$dest"
             fi
     
-              }
+              
             ;;
         2)
             echo "[Traceroute]"
