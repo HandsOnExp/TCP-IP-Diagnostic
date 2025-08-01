@@ -64,7 +64,32 @@ while true; do
             ;;
 
         4)
-            echo "[HTTP Check]"
+            echo "[HTTP status Test]"
+              command -v curl >/dev/null 2>&1 || {
+                echo "curl is not installed"
+                echo "Installing curl..."
+                sudo apt update && sudo apt install -y curl
+              }
+
+            read -p "Choose your destination: " dest
+            if [[ -z "$dest" ]]; then
+                echo "Destination cannot be empty."
+            else
+                echo "Checking HTTP status on $dest..."
+                code=$(curl -s -o /dev/null -w "%{http_code}" "$dest")
+
+                if [[ $code == 2* ]]; then
+                  echo "Success: HTTP $code"
+                elif [[ $code == 3* ]]; then
+                  echo "Redirect: HTTP $code"
+                elif [[ $code == 4* ]]; then
+                  echo "Client error: HTTP $code"
+                elif [[ $code == 5* ]]; then
+                  echo "Server error: HTTP $code"
+                else
+                  echo "Unexpected response: HTTP $code"
+                fi
+            fi
             ;;
         5)
             echo "Exiting. Goodbye!"
